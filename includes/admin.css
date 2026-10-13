@@ -1,0 +1,193 @@
+/* Shared styles for the CDARS admin pages.
+   Save as ../includes/admin.css. Change the colours here and every page follows. */
+
+:root {
+  --brand: #0077b2;        /* club banner blue */
+  --brand-dark: #005a87;
+  --text: #1f2933;
+  --muted: #555;
+  --error-bg: #fde8e8;
+  --error-text: #9b1c1c;
+  --ok-bg: #e6f4ea;
+  --ok-text: #1e5b2f;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ---------- Header banner ---------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
+  background: var(--brand);
+  color: #fff;
+}
+
+.site-header a { color: inherit; text-decoration: none; }
+
+.site-header img {
+  display: block;
+  height: 56px;
+  width: auto;
+  padding: 4px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.site-header .name { font-size: 20px; font-weight: 700; line-height: 1.2; }
+.site-header .callsigns { font-size: 13px; }
+.site-header .section { margin-left: auto; font-size: 15px; font-weight: 600; }
+
+/* ---------- Page and panel ---------- */
+
+.page { padding: 20px; }
+
+.panel {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.9);
+  border-top: 4px solid var(--brand);
+  border-radius: 6px;
+}
+
+.panel--menu { max-width: 320px; text-align: center; }
+.panel--slim { max-width: 560px; }
+.panel--quiz { max-width: 900px; }
+
+.lead { margin: 0 0 20px; text-align: center; }
+.panel--wide { max-width: 800px; }
+
+.panel h1 {
+  margin: 0 0 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  text-align: center;
+  color: var(--brand-dark);
+}
+
+/* ---------- Forms ---------- */
+
+.panel label { display: block; margin-bottom: 4px; font-weight: bold; }
+
+.panel input[type="text"],
+.panel input[type="email"],
+.panel input[type="password"] {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 8px;
+  font: inherit;
+  border: 1px solid #767676;
+  border-radius: 3px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 8px 24px;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  background: #f3f4f6;
+  border: 1px solid #767676;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn:hover { background: #e5e7eb; }
+
+.btn-primary { color: #fff; background: var(--brand); border-color: var(--brand); }
+.btn-primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+
+.btn-block { display: block; width: 100%; margin-bottom: 12px; }
+
+.actions { display: flex; justify-content: center; gap: 12px; }
+
+.panel--menu form { margin: 20px 0 0; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ---------- Messages ---------- */
+
+.error, .flash { margin-bottom: 16px; padding: 8px 12px; border-radius: 3px; }
+.error { background: var(--error-bg); color: var(--error-text); }
+.flash { background: var(--ok-bg); color: var(--ok-text); }
+
+/* ---------- User list ---------- */
+
+.count { margin: 0 0 20px; text-align: center; color: var(--muted); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid #ccc; }
+th { color: var(--brand-dark); border-bottom: 2px solid var(--brand); }
+
+.pager { display: flex; justify-content: center; align-items: center; gap: 16px; margin: 20px 0; }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 520px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header .section { margin-left: 0; width: 100%; }
+  .panel { margin: 20px auto; padding: 20px; }
+}
+
+/* ---------- Learner pages and quiz ---------- */
+
+.intro { margin: 0 0 16px; text-align: center; }
+.fine { margin: 0 0 20px; font-size: 13px; text-align: center; color: var(--muted); }
+.fine a { color: var(--brand-dark); }
+.link-list { margin: 0 0 20px; padding-left: 20px; }
+.link-list li { margin-bottom: 10px; }
+.link-list a { color: var(--brand-dark); }
+
+.btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
+
+.qgrid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0; }
+.qbtn { min-width: 44px; padding: 8px 12px; }
+.qbtn.visited { background: #fff3b0; border-color: #b59b00; }
+.qframe { display: block; width: 100%; height: 640px; border: 0; background: transparent; }
+
+body.embed { padding: 12px; background: #fff; }
+body.embed .panel { margin: 0 auto; }
+
+.question { margin: 0 0 12px; font-weight: 700; }
+.figures { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; }
+.figures img { max-width: 100%; height: auto; }
+
+.options { margin: 0 0 16px; padding: 0; list-style: none; }
+.options li { margin-bottom: 6px; }
+.options label {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin: 0; padding: 6px 8px; font-weight: normal;
+  border-radius: 3px; cursor: pointer;
+}
+.options label:hover { background: #eef6fb; }
+.options.review label { cursor: default; }
+.options.review label:hover { background: transparent; }
+.options.review li.correct label { background: var(--ok-bg); }
+.options.review li.wrong label { background: var(--error-bg); }
+
+.score { margin: 0 0 12px; font-size: 18px; font-weight: 700; text-align: center; }
+.review-card { margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #ccc; }
+.reference { padding: 8px 12px; background: #f3f4f6; border-radius: 3px; white-space: pre-wrap; }
+table.compact { width: auto; margin: 0 auto 16px; }
+table.compact td { border-bottom: 1px solid #e5e7eb; }
+caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
+tfoot th { border-top: 2px solid var(--brand); border-bottom: 0; }
