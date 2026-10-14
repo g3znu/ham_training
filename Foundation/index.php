@@ -45,9 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Foundation Licence Revision</h1>
 
     <p class="intro">
-      During the COVID-19 pandemic we've had to be inventive in the way we train.<br>
-      I hope this site is of help to your study and passing of the Foundation exam.<br>
-      Bryan (M0IHY)
+      The Foundation licence is the starting point for many people on their journey into amateur radio.
+The Foundation Exam is administered by the Radio Society of Great Britain (RSGB)<br>
+These revision questions are based on the latest syllabus and will help you to check your progress.
     </p>
 
     <?php if ($error !== ''): ?>

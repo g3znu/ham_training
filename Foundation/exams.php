@@ -28,15 +28,15 @@ $headerSection = 'Foundation training';
     <ul class="link-list">
       <li>
         <strong>Amateur Radio Licence, Guidance for Licensees</strong><br>
-        <a href="https://www.ofcom.org.uk/__data/assets/pdf_file/0026/82637/amateur_radio_licence_guidance_for_licensees.pdf" rel="noopener">Download from Ofcom</a>
+        <a href="https://www.ofcom.org.uk/__data/assets/pdf_file/0026/82637/amateur_radio_licence_guidance_for_licensees.pdf" rel="noopener" target="_blank" >Download from Ofcom</a>
       </li>
       <li>
         <strong>Section 2, Terms, Conditions and Limitations</strong><br>
-        <a href="https://www.ofcom.org.uk/__data/assets/pdf_file/0027/62991/amateur-terms.pdf" rel="noopener">Download from Ofcom</a>
+        <a href="https://www.ofcom.org.uk/__data/assets/pdf_file/0027/62991/amateur-terms.pdf" rel="noopener" target="_blank" >Download from Ofcom</a>
       </li>
       <li>
         <strong>Reference Data for use in the Foundation Level Examination (EX307)</strong><br>
-        <a href="http://rsgb.org/main/files/2015/09/EX307-Foundation-Reference-Booklet.pdf" rel="noopener">Download from the RSGB</a>
+        <a href="https://rsgb.org/main/clubs-training/forms/" rel="noopener" target="_blank" >Download from the RSGB</a>
       </li>
       <li><strong>Foundation Licence Manual</strong></li>
     </ul>
