@@ -161,7 +161,8 @@ th { color: var(--brand-dark); border-bottom: 2px solid var(--brand); }
 
 .qgrid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0; }
 .qbtn { min-width: 44px; padding: 8px 12px; }
-.qbtn.visited { background: #fff3b0; border-color: #b59b00; }
+.qbtn.visited, .qbtn.answered { background: #fff3b0; border-color: #b59b00; }
+.qbtn.answered::after { content: " \2713"; }   /* tick, so colour isn't the only signal */
 .qframe { display: block; width: 100%; height: 640px; border: 0; background: transparent; }
 
 body.embed { padding: 12px; background: #fff; }
@@ -191,3 +192,4 @@ table.compact { width: auto; margin: 0 auto 16px; }
 table.compact td { border-bottom: 1px solid #e5e7eb; }
 caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
 tfoot th { border-top: 2px solid var(--brand); border-bottom: 0; }
+#save-status:empty { display: none; }
