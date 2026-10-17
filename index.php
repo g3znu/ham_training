@@ -1,76 +1,73 @@
 <?php
 declare(strict_types=1);
- 
-// This page sits in the app root, so the shared header needs these two settings.
-$brandRoot     = '';
-$headerSection = 'Licence training';
- 
-// folder/page => [button label, short description]
-$courses = [
-    'Foundation/index.php'   => ['Foundation Training',   'Tutorial slides and exam questions.'],
-    'Intermediate/index.php' => ['Intermediate Training', 'Tutorial slides and exam questions.'],
-    'Advanced/index.php'     => ['Full Level Training',   'Links to training material and the RSGB question bank.'],
-];
+
+require_once '../includes/user_auth.php';
+require_once '../connections/connTraining.php';
+
+startAppSession();
+mysqli_select_db($connTraining, $database_connTraining);
+
+$brandRoot     = '../';
+$headerSection = 'Foundation training';
+$error         = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!csrfValid(postString('csrf_token'))) {
+        $error = 'Your session has expired. Please try again.';
+    } else {
+        $email = postString('email_address');
+
+        if ($email !== '' && loginUser($connTraining, $email)) {
+            header('Location: slides_or_exam.php');
+            exit;
+        }
+
+        // Not a registered address: explain how to register.
+        header('Location: register.php');
+        exit;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Licence Training – Chesham &amp; District Amateur Radio Society</title>
-<link rel="stylesheet" href="includes/admin.css?v=<?= (int) @filemtime(__DIR__ . '/includes/admin.css') ?>">
+<title>Foundation Licence Revision</title>
+<link rel="stylesheet" href="../includes/admin.css?v=<?= (int) @filemtime(__DIR__ . '/../includes/admin.css') ?>">
 </head>
 <body>
- 
-<?php require __DIR__ . '/includes/admin_header.php'; ?>
+
+<?php require __DIR__ . '/../includes/admin_header.php'; ?>
 <main class="page">
- 
-  <div class="panel panel--slim">
-    <h1>Exam Revision Questions</h1>
- 
-    <p>
-      The UK Amateur Radio Licence has three levels, Foundation, Intermediate and Full Level.
-      It is a progressive licence with increasing access to the spectrum and power levels as you
-      progress through the licence classes.
-    </p>
-    <p>
-      In order to obtain an Amateur Radio licence you need to demonstrate a level of technical
-      knowledge and expertise relevant to the licence class.
-    </p>
-    <p>
-      <strong>Foundation</strong> &ndash; this is the entry level for those starting in the hobby.
-      The Foundation level exam consists of 26 questions with a pass mark of 19. The exam questions
-      are written to test basic understanding of radio technology, propagation and safety.
-    </p>
-    <p>
-      <strong>Intermediate</strong> &ndash; permits licensees to use high power levels, so you need
-      to demonstrate greater technical competence. The exam covers more detailed technical aspects
-      of receiver and transmitter design, antennas and matching. The exam has 46 questions and the
-      pass mark is 28.
-    </p>
-    <p>
-      <strong>Full Level</strong> &ndash; the full level licence permits the use of high transmitter
-      power levels and access to all the amateur frequency bands. It also allows licensees to use
-      their equipment in some other countries, although some countries may require you to apply for
-      a specific &ldquo;reciprocal licence&rdquo;. The exam has a very broad syllabus and consists of
-      58 questions with a pass mark of 35.
-    </p>
-    <p>
-      The CDARS revision questions cover the Foundation and Intermediate exams. Some information and
-      pointers towards other resources for the Full Level exam are also covered.
-    </p>
- 
-    <p class="intro"><strong>Please select the required licence training.</strong></p>
- 
-    <?php foreach ($courses as $url => [$label, $description]): ?>
-      <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-block btn-primary"><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></a>
-      <p class="fine"><?= htmlspecialchars($description, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endforeach; ?>
-  </div>
- 
+
+  <form class="panel panel--slim" method="post" action="">
+    <h1>Foundation Licence Revision</h1>
+
+    <p class="intro">The Foundation licence is the starting point for many people on their journey into amateur radio. The Foundation Exam is administered by the Radio Society of Great Britain (RSGB).</p>
+
+    <p class="intro">These revision questions are based on the latest syllabus (2024 v1.6b) and will help you to check your progress.</p>
+
+    <p class="intro">To access the revision questions you need to register your name and email address with CDARS by emailing the Secretary using the email address in our <a href="https://www.g3mdg.org.uk/about-us/contact-us/" target="_blank" rel="noopener">Contact Us</a> page.</p>
+
+    <?php if ($error !== ''): ?>
+      <div class="error" role="alert"><?= h($error) ?></div>
+    <?php endif; ?>
+
+    <input type="hidden" name="csrf_token" value="<?= h(csrfToken()) ?>">
+
+    <label for="email_address">Email address</label>
+    <input type="email" id="email_address" name="email_address" maxlength="64"
+           autocomplete="email" required autofocus>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </div>
+  </form>
+
 </main>
- 
-<?php require __DIR__ . '/includes/site_background.php'; ?>
- 
+
+<?php require __DIR__ . '/../includes/site_background.php'; ?>
+
 </body>
 </html>
